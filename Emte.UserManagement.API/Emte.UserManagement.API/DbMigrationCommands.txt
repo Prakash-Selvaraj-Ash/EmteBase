@@ -5,3 +5,4 @@ Add Migration DBContext wise: dotnet ef migrations add InitialCreate --context <
 forEx: dotnet ef migrations add InitialCreate --context ClientDbContext --startup-project ../Emte.UserManagement.API.csproj --output-dir Migrations/ClientMigrations
 forEx: dotnet ef migrations add InitialCreate --context TenantDbContext --startup-project ../Emte.UserManagement.API.csproj --output-dir Migrations/TenantMigrations    
 Publish Migration: dotnet ef database update
+forEx: dotnet ef database update --context TenantDbContext --startup-project ../Emte.UserManagement.API.csproj
