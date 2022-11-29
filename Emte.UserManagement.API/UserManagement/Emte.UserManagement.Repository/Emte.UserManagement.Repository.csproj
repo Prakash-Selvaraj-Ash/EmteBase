@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Emte.Core.Repository.Contracts\Emte.Core.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\Emte.UserManagement.DomainModels\Emte.UserManagement.DomainModels.csproj" />
+    <ProjectReference Include="..\..\Core\Emte.Core.DataAccess\Emte.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\Emte.UserManagement.DataAccess\Emte.UserManagement.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Core\Emte.Core.DataAccess\Emte.Core.DataAccess.csproj" />
+  </ItemGroup>
+</Project>
