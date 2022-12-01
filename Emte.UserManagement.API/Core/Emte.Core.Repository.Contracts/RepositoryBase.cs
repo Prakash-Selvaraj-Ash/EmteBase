@@ -33,7 +33,7 @@ namespace Emte.Core.Repository.Contracts
             return Connector.Update(domain);
         }
 
-        public TDomain Create(TDomain domain)
+        public TDomain  Create(TDomain domain)
         {
             return Connector.Create(domain);
         }

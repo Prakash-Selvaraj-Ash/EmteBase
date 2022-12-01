@@ -12,6 +12,7 @@ namespace Emte.UserManagement.Repository
 		{
 			services.AddTransient<IRepository<Tenant>, TenantRepository<TenantDbContextBase>>();
             services.AddTransient<IRepository<TenantStatuses>, TenantStatusRepository<TenantDbContextBase>>();
+			services.AddTransient<IUserRepository<AppUser>, UserRepository<ClientDBContextBase>>();
         }
 	}
 }

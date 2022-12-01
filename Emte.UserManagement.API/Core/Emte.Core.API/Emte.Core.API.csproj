@@ -13,9 +13,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Filters\" />
+    <None Remove="BCrypt.Net-Next" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

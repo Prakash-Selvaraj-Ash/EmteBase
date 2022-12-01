@@ -26,9 +26,9 @@ public class TenantsController : Controller
     }
 
     [HttpPost("ApproveTenant")]
-    public async Task ApproveTenant([FromBody] ApproveTenantRequest tenantRequest, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<ApproveTenantResponse> ApproveTenant([FromBody] ApproveTenantRequest tenantRequest, CancellationToken cancellationToken = default(CancellationToken))
     {
-         await _tenantService.ApproveTenant(tenantRequest.TenantId, cancellationToken);
+         return await _tenantService.ApproveTenant(tenantRequest.TenantId, cancellationToken);
     }
 }
 

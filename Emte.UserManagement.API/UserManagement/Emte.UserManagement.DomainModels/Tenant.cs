@@ -10,6 +10,6 @@ public class Tenant : IDomain, IWithId, IWithName
     public Guid StatusId { get; set; }
     [ForeignKey(nameof(StatusId))]
     public virtual TenantStatuses? Status { get; set; }
-    public string? OtherDetails { get; set; }
+    public string? MetaData { get; set; }
 }
 

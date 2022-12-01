@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Emte.Core.Authentication.Contract;
 using Emte.Core.DataAccess;
 using Emte.Core.Repository.Contracts;
 using Emte.UserManagement.BusinessLogic.Contracts;
@@ -16,6 +17,7 @@ namespace Emte.UserManagement.BusinessLogic
         private readonly IMapper _mapper;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IRepository<TenantStatuses> _tenantStatusRepository;
+        private readonly IAuthenticationService<AppUser> _authenticationService;
         private readonly IEntityService<TenantDbContextBase> _tenantEntityService;
         private readonly IEntityService<ClientDBContextBase> _clientEntityService;
 
@@ -24,11 +26,13 @@ namespace Emte.UserManagement.BusinessLogic
             IRepository<TenantStatuses> tenantStatusRepository,
             IEntityService<TenantDbContextBase> tenantEntityService,
             IEntityService<ClientDBContextBase> clientEntityService,
+            IAuthenticationService<AppUser> authenticationService,
             IMapper mapper)
 		{
 			_mapper = mapper;
 			_tenantRepository = tenantRepository;
             _tenantStatusRepository = tenantStatusRepository;
+            _authenticationService = authenticationService;
             _tenantEntityService = tenantEntityService;
             _clientEntityService = clientEntityService;
 		}
@@ -46,7 +50,7 @@ namespace Emte.UserManagement.BusinessLogic
             return _mapper.Map<CreateTenantResponse>(tenant);
         }
 
-        public async Task ApproveTenant(Guid tenantId, CancellationToken cancellationToken)
+        public async Task<ApproveTenantResponse> ApproveTenant(Guid tenantId, CancellationToken cancellationToken)
         {
             var requestedStatusId = _tenantStatusRepository.Set.Single(r => r.Name == Constants.TenantStaus.Approved).Id;
             var tenant = await _tenantRepository.ReadByIdAsync(tenantId, cancellationToken);
@@ -54,6 +58,13 @@ namespace Emte.UserManagement.BusinessLogic
 
             await _tenantEntityService.SaveAsync(cancellationToken);
             await _clientEntityService.MigrateAsync(cancellationToken);
+
+            var createUserRequest = _mapper.Map<CreateUserRequest>(tenant);
+            createUserRequest.ConfirmPassword = createUserRequest.Password;
+            var appUser = await _authenticationService.RegisterUser(createUserRequest, cancellationToken);
+
+            await _clientEntityService.SaveAsync(cancellationToken);
+            return new ApproveTenantResponse { Email = tenant.Email, Password = createUserRequest.Password };
         }
     }
 }

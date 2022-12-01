@@ -7,6 +7,6 @@ namespace Emte.UserManagement.BusinessLogic.Contracts;
 public interface ITenantService
 {
     Task<CreateTenantResponse> Subscribe(CreateTenantRequest model, CancellationToken cancellationToken);
-    Task ApproveTenant(Guid tenantId, CancellationToken cancellationToken);
+    Task<ApproveTenantResponse> ApproveTenant(Guid tenantId, CancellationToken cancellationToken);
 }
 

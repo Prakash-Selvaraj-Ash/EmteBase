@@ -10,6 +10,12 @@ namespace Emte.UserManagement.DataAccess
 		public ClientDBContextBase() { }
 		
         public DbSet<AppUser>? User { get; set; }
+        public DbSet<AppUserTokenMap>? UserTokenMap { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppUserTokenMap>().HasOne(au => au.AppUser);
+        }
     }
 }
 

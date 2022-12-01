@@ -14,4 +14,7 @@
     <Folder Include="Request\" />
     <Folder Include="Response\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Emte.Core.Authentication.Contract\Emte.Core.Authentication.Contract.csproj" />
+  </ItemGroup>
 </Project>
